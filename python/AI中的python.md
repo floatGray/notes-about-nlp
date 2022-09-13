@@ -202,9 +202,140 @@ Python中的类
 
 ## 第八章
 
+Python中文件的读取、异常和模块
+
+- `*with* open("文件路径", "打开模式", *encoding* = "操作文件的字符编码") *as* f:`
+
+- **打开模式缺省，默认为只读模式**
+
+- 逐行进行读取——`f.readline()`
+
+- 读入所有行，以每行为元素形成一个列表——`f.readlines()`
+
+- ```python
+  with open("三国演义片头曲_gbk.txt", "r", encoding="gbk") as f:     
+      for text in f:         # f本身就是一个可迭代对象，每次迭代读取一行内容 
+          print(text)  
+  ```
+
+- 向文件写入一个字符串或字节流（二进制）——`f.write()`
+
+- 将一个元素为字符串的列表整体写入文件——`f.writelines()`
+
+- ```python
+  with open("浪淘沙_北戴河.txt", "r+", encoding="gbk") as f:
+  #     for line in f:
+  #         print(line)   # 全部读一遍后，指针到达结尾
+      f.seek(0,2)         # 或者可以将指针移到末尾f.seek(偏移字节数,位置（0：开始；1：当前位置；2：结尾）)
+      text = ["萧瑟秋风今又是，\n", "换了人间。\n"]
+      f.writelines(text)
+  ```
+
+- csv是由逗号将数据分开的字符序列，可以由excel打开和json常被用来存储字典类型
+
+- 异常处理
+
+  - 除0运算——ZeroDivisionError
+  - 找不到可读文件——FileNotFoundError
+  - 值错误——ValueError
+  - 索引错误——IndexError
+  - 类型错误——TypeError
+  - NameError 使用一个未被定义的变量  
+  - KeyError 试图访问字典里不存在的键 
+
+- try_except。如果try内代码块顺利执行，except不被触发如果try内代码块发生错误，触发except,执行except内代码块
+
+- 万能异常 Exception （所有错误的老祖宗）
+
+- try_except_else：如果try 模块执行，则else模块也执行，可以将else 看做try成功的额外奖赏
+
+- try_except_finally：不论try模块是否执行，finally最后都执行
+
+- 模块：已经被封装好  无需自己再“造轮子”  声明导入后，拿来即用
+
+- 时间库time &ensp;随机库random 容器数据类型collection\ &ensp;迭代器函数itertools&emsp;数据分析numpy、pandas\ &ensp;数据可视化matplotlib\ &ensp;机器学习scikit-learn\ &ensp;深度学习Tensorflow
+
+- 导入模块中所有的类和函数**——from 模块 import *
+
+  ```python
+  from random import * 
+  
+  print(randint(1,100))       # 产生一个[1,100]之间的随机整数
+  print(random())             # 产生一个[0,1)之间的随机小数
+  ```
+
+  
+
 ## 第九章
 
-## 第十章
+python的细节
+
+- 浅拷贝就是多一个指针指向地址
+
+- **引用数组的概念**  列表内的元素可以分散的存储在内存中  列表存储的，实际上是这些**元素的地址！地址的存储在内存中是连续的
+
+- 修改列表原来的元素会改变浅拷贝的列表的值，新增一个全新的值则不会改变浅拷贝的值
+
+- 对元组型元素进行操作，由于是元组不可变，所以实际上是生成了一个新地址指向新元组
+
+- **浅拷贝之后**  针对不可变元素（数字、字符串、元组）的操作，都各自生效了  针对不可变元素（列表、集合）的操作，发生了一些混淆
+
+- 深拷贝：深拷贝将所有层级的相关元素全部复制，完全分开，泾渭分明，避免了上述问题
+
+- 字典字典数据类型，通过空间换时间，实现了快速的数据查找因为散列值对应位置的顺序与键在字典中显示的顺序可能不同，因此表现出来字典是无序的
+
+- **通过紧凑数组实现字符串的存储**
+
+- ```python
+  ls = [[0]*10]*5 # 这个是把一个列表浅拷贝了5份
+  ```
+
+- 解析语法[expression **for value in iterable** if conditihon]三要素：表达式、可迭代对象、if条件（可选）
+
+- 条件表达式
+
+- 三大神器
+
+- **生成器** 1）采用惰性计算的方式  2）无需一次性存储海量数据  3）一边执行一边计算，只计算每次需要的值4）实际上一直在执行next()操作，直到无值可取
+
+- 生成器函数——yield
+
+- 可以被next()函数调用并不断返回下一个值，直至没有数据可取的对象称为迭代器：Iterator
+
+- **闭包：延伸了作用域的函数**  
+
+  **如果一个函数定义在另一个函数的作用域内，并且引用了外层函数的变量，则该函数称为闭包**
+
+  **闭包是由函数及其相关的引用环境组合而成的实体(即：闭包=函数+引用环境)**
+
+- 装饰器
+
+  ```python
+  import time
+  
+  
+  def timer(func):
+      
+      def inner(*args, **kwargs):
+          print("inner run")
+          start = time.time()
+          func(*args, **kwargs)
+          end = time.time()
+          print("{} 函数运行用时{:.2f}秒".format(func.__name__, (end-start)))
+      
+      return inner
+  
+  
+  @timer                # 相当于实现了f1 = timer(f1)
+  def f1(n):
+      print("f1 run")
+      time.sleep(n)
+  
+      
+  f1(2)
+  ```
+
+  
 
 ## 第十一章
 
