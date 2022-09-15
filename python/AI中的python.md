@@ -337,7 +337,45 @@ python的细节
 
   
 
+# 第十章
+
+Python中的标准库
+
+- time
+
+  `time.time()` `time.perf_counter()` `time.process_time()` `time.strftime`
+
+  ```python
+  lctime = time.localtime()
+  time.strftime("%Y-%m-%d %A %H:%M:%S", lctime)
+  # '2022-09-15 Thursday 10:04:58'
+  ```
+
+- random
+
+  相同种子会产生相同的随机数,如果不设置随机种子，以系统当前时间为默认值
+
+  `choice(seq)`从序列类型中随机返回一个元素
+
+  `choices(seq,weights=None, k)`对序列类型进行k次重复采样，可设置权重
+
+  `choices(['win', 'lose', 'draw'], [4,4,2], *k*=10)`
+
+- collections
+
+  namedtuple——具名元组\Counter——计数器工具\deque——双向队列
+
+- itertools库——迭代器
+
+  product——笛卡尔积\permutations——排列\combinations——组合\zip——短拉链\zip_longest——长拉链
+
+  itertools 其他函数可参考官方文档
+
 ## 第十一章
+
+Numpy
+
+- 在数据处理的过程中，遇到使用“Python for循环” 实现一些向量化、矩阵化操作的时候，要优先考虑用Numpy
 
 
 ## 第十二章
