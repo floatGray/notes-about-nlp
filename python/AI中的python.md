@@ -377,8 +377,15 @@ Numpy
 
 - 在数据处理的过程中，遇到使用“Python for循环” 实现一些向量化、矩阵化操作的时候，要优先考虑用Numpy
 
-
 ## 第十二章
+
+Pandas
+
+- 基于Numpy构建的Pandas库，提供了使得数据分析变得更快更简单的高级数据结构和操作工具
+- 通用结构: pd.Series(data, index=index, dtype=dtype)
+- data：数据，可以是列表，字典或Numpy数
+- index：索引，为可选参数
+- dtype: 数据类型，为可选参数
 
 
 ## 第十三章
